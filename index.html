@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Issue Tracker</title>
+    <!-- daisy ui link  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        .text-color{
+            color: #64748b;
+        }
+    </style>
+  </head>
+  <body class="bg-[#f8fafc] min-h-[100vh] py-[60px] px-[20px]">
+    <section
+      class="w-full mx-auto max-w-[520px] bg-white p-8 rounded-md shadow-sm"
+    >
+      <div class="flex flex-col justify-center items-center">
+        <img src="assets/github-logo.png" alt="" />
+        <h2 class="text-2xl font-semibold mt-6">GitHub Issues Tracker</h2>
+        <p class="text-[#64748b]">Sign in to manage your issues</p>
+      </div>
+      <div class="mt-6">
+        <fieldset class="fieldset w-full">
+          <label class="label">User Name</label>
+          <input
+            type="email"
+            class="input w-full"
+            placeholder="Enter User Name"
+          />
+          <span class="text-primary">Default: admin</span>
+
+          <label class="label">Password</label>
+          <input
+            type="password"
+            class="input w-full"
+            placeholder="Enter Password"
+          />
+          <span class="text-primary">Default: admin123</span>
+
+         <a href="./home.html" class="btn btn-primary mt-4">Sign in</a>
+        </fieldset>
+      </div>
+      <div class="divider my-6">OR</div>
+      <div class="text-center">
+        <p class="text-color mb-6">Demo Credentials</p>
+       <div class="bg-base-200">
+         <p>Username: admin</p>
+        <p>Password: admin123</p>
+       </div>
+      </div>
+    </section>
+  </body>
+</html>
