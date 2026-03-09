@@ -31,6 +31,7 @@
         <fieldset class="fieldset w-full">
           <label class="label">User Name</label>
           <input
+          id="user-name-input"
             type="email"
             class="input w-full"
             placeholder="Enter User Name"
@@ -39,23 +40,25 @@
 
           <label class="label">Password</label>
           <input
+          id="pass-input"
             type="password"
             class="input w-full"
             placeholder="Enter Password"
           />
           <span class="text-primary">Default: admin123</span>
 
-         <a href="./home.html" class="btn btn-primary mt-4">Sign in</a>
+         <a id="signin-btn" type="submit" href="./home.html" class="btn btn-primary mt-4">Sign in</a>
         </fieldset>
       </div>
       <div class="divider my-6">OR</div>
       <div class="text-center">
         <p class="text-color mb-6">Demo Credentials</p>
-       <div class="bg-base-200">
+       <div class="bg-base-200 p-6">
          <p>Username: admin</p>
         <p>Password: admin123</p>
        </div>
       </div>
     </section>
+    <script src="./script/index.js"></script>
   </body>
 </html>
