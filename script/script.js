@@ -1,20 +1,39 @@
 const getElementById = (id) => {
   return document.getElementById(id);
 };
+
+const allBtn = getElementById("all-btn");
+const openBtn = getElementById("open-btn");
+const closeBtn = getElementById("close-btn");
+
 let activeTab = "all";
+handleTabChange(activeTab);
 let totalIssue;
 function handleTabChange(tab) {
   activeTab = tab;
   loadData(tab);
+  allBtn.classList.remove("btn-primary");
+  openBtn.classList.remove("btn-primary");
+  closeBtn.classList.remove("btn-primary");
+
+  if (activeTab === "all") {
+    allBtn.classList.add("btn-primary");
+  }
+  if (activeTab === "open") {
+    openBtn.classList.add("btn-primary");
+  }
+  if (activeTab === "closed") {
+    closeBtn.classList.add("btn-primary");
+  }
 }
 
-getElementById("all-btn").addEventListener("click", () => {
+allBtn.addEventListener("click", () => {
   handleTabChange("all");
 });
-getElementById("open-btn").addEventListener("click", () => {
+openBtn.addEventListener("click", () => {
   handleTabChange("open");
 });
-getElementById("close-btn").addEventListener("click", () => {
+closeBtn.addEventListener("click", () => {
   handleTabChange("closed");
 });
 
@@ -35,6 +54,13 @@ async function loadData(activeStatus) {
   console.log("filter", totalIssue);
   displayData(filteredData);
 }
+
+
+const searchIssues = (searchText) =>{
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`;
+}
+
+
 const displayData = (data) => {
   const issueContainer = getElementById("issues-container");
   issueContainer.innerHTML = "";
@@ -110,19 +136,4 @@ const displayData = (data) => {
     issueContainer.appendChild(cardWrapper);
   });
 };
-// loadData("https://phi-lab-server.vercel.app/api/v1/lab/issues")
 
-// "id": 1,
-// "title": "Fix navigation menu on mobile devices",
-// "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-// "status": "open",
-// "labels": [
-// "bug",
-// "help wanted"
-// ],
-// "priority": "high",
-// "author": "john_doe",
-// "assignee": "jane_smith",
-// "createdAt": "2024-01-15T10:30:00Z",
-// "updatedAt": "2024-01-15T10:30:00Z"
-// },
