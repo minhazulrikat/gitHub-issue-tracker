@@ -20,10 +20,11 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
+
   <body class="bg-neutral-100">
-    <header class="bg-white shadow-sm ">
+    <header class="bg-white shadow-sm">
       <nav
-        class="navbar bg-base-100  h-auto flex flex-col md:flex-row justify-between items-center md:w-11/12 max-w-[1200px] mx-auto gap-4"
+        class="navbar bg-base-100 h-auto flex flex-col md:flex-row justify-between items-center md:w-11/12 max-w-[1200px] mx-auto gap-4"
       >
         <div class="flex justify-center items-center w-full md:w-fit">
           <a class="flex h-9 justify-between items-center gap-1 text-xl"
@@ -38,9 +39,16 @@
 
         <!-- Search -->
         <div class="w-full md:w-auto flex justify-center md:justify-end">
-          <input id="searchInput" type="text" placeholder="Search" class="input w-auto" />
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search"
+            class="input w-auto"
+          />
 
-          <button id="searchBtn" class="btn btn-primary shrink-0">Search</button>
+          <button id="searchBtn" class="btn btn-primary shrink-0">
+            Search
+          </button>
         </div>
       </nav>
     </header>
@@ -73,7 +81,9 @@
               alt=""
             />
             <div>
-              <h4 class="text-xl"><span id="total-issue-count">50</span> issues</h4>
+              <h4 class="text-xl">
+                <span id="total-issue-count">50</span> issues
+              </h4>
               <p class="text-neutral-500">
                 Track and manage your project issues
               </p>
@@ -100,14 +110,25 @@
           class="rounded-md p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
         >
           <!-- issue card  -->
-  
+
           <!-- issue card end here  -->
         </div>
       </div>
     </section>
 
+    <!-- issue modal popup -->
+
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+      <div id="modal-container" class="modal-box">
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
     <script src="./script/script.js"></script>
   </body>
 </html>
-
-

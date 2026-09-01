@@ -66,7 +66,7 @@ async function loadData(activeStatus) {
 
     displayData(filteredData);
   } catch (error) {
-    showError(error.message);
+    showError();
     console.log(error);
   }
 }
@@ -77,7 +77,7 @@ getElementById("searchBtn").addEventListener("click", () => {
   searchIssues(inputText);
 });
 
-function showError(errorMessage) {
+function showError() {
   const issueDisplaySection = getElementById("issue-Display-Section");
   const issueTab = getElementById("issueTab");
   issueDisplaySection.innerHTML = "";
@@ -106,11 +106,30 @@ const searchIssues = async (searchText) => {
     handleTabChange(activeTab);
     displayData(issues.data);
   } catch (error) {
-    showError(error.message);
+    showError();
     console.log(error);
   }
 };
+async function showModal(id) {
+  const modalContainer = getElementById("modal-container");
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    my_modal_5.showModal();
+    const issue = await response.json();
 
+     const issueDetail = document.createElement("div");
+
+     issueDetail.innerHTML = ``
+
+  } catch (error) {
+    console.log(error);
+    showError();
+  }
+}
 const displayData = (data) => {
   const issueContainer = getElementById("issues-container");
   issueContainer.innerHTML = "";
@@ -121,8 +140,8 @@ const displayData = (data) => {
     cardWrapper.innerHTML = `
     
     <!-- issue card  -->
-          <div
-            class="card border-t-4 ${element.status === "open" ? "border-success" : "border-[#A855F7]"}  flex flex-col justify-start items-center rounded shadow"
+          <div onclick="showModal(${element.id})" id="${element.id}"
+            class="card cursor-pointer border-t-4 ${element.status === "open" ? "border-success" : "border-[#A855F7]"}  flex flex-col justify-start items-center rounded shadow"
           >
             <!-- card top -->
             <div class="p-4 space-y-3 w-full">
@@ -165,7 +184,7 @@ const displayData = (data) => {
                     class="flex justify-start items-center max-w-fit gap-1 ${label === "bug" ? "text-error" : label === "help wanted" ? "text-[#D97706]" : "text-[#d96c06]"}  py-[6px] px-2 text-xs uppercase text-center rounded-full ${label === "bug" ? "bg-[#FEECEC]" : label === "help wanted" ? "bg-[#FFF8DB]" : "bg-green-200"} border ${label === "bug" ? "border-error" : label === "help wanted" ? "border-[#D97706]" : "border-green-500"} "
                   >
                     <img src="./assets/BugDroid.png" alt="" /> ${label}
-                  </p>`;
+                  </p> `;
                    })
                    .join("")}
                   
@@ -182,6 +201,7 @@ const displayData = (data) => {
             </div>
           </div>
           <!-- issue card end here  -->
+          
     `;
     issueContainer.appendChild(cardWrapper);
   });
