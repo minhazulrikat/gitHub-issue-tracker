@@ -73,7 +73,7 @@ data.forEach((element)=>{
 })
 };
 loadData()
-
+console.log("just checking that if it published auto or not")
 
 // "id": 1,
 // "title": "Fix navigation menu on mobile devices",
