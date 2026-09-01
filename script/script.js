@@ -45,11 +45,11 @@ data.forEach((element)=>{
                   </p>
                 </div>
                 <!-- card label wrapper -->
-                <div class="flex max-w-fit gap-1">
+                <div class="flex gap-1 w-full flex-wrap">
                  ${element.labels.map((label)=>{
                     
                     return  `<p
-                    class="flex justify-between items-center max-w-fit gap-1 ${label=== "bug" ? "text-error": label==="help wanted"? "text-[#D97706]":"text-[#d96c06]"}  py-[6px] px-2 text-xs uppercase text-center rounded-full ${label=== "bug" ? "bg-[#FEECEC]": label==="help wanted"? "bg-[#FFF8DB]":"bg-green-200"} border ${label=== "bug" ? "border-error": label==="help wanted"? "border-[#D97706]":"border-green-500"} "
+                    class="flex justify-start items-center max-w-fit gap-1 ${label=== "bug" ? "text-error": label==="help wanted"? "text-[#D97706]":"text-[#d96c06]"}  py-[6px] px-2 text-xs uppercase text-center rounded-full ${label=== "bug" ? "bg-[#FEECEC]": label==="help wanted"? "bg-[#FFF8DB]":"bg-green-200"} border ${label=== "bug" ? "border-error": label==="help wanted"? "border-[#D97706]":"border-green-500"} "
                   >
                     <img src="./assets/BugDroid.png" alt="" /> ${label}
                   </p>`
