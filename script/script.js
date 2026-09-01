@@ -11,7 +11,7 @@ handleTabChange(activeTab);
 let totalIssue;
 function handleTabChange(tab) {
   activeTab = tab;
-  loadData(tab);
+
   allBtn.classList.remove("btn-primary");
   openBtn.classList.remove("btn-primary");
   closeBtn.classList.remove("btn-primary");
@@ -25,6 +25,11 @@ function handleTabChange(tab) {
   if (activeTab === "closed") {
     closeBtn.classList.add("btn-primary");
   }
+
+  if (activeTab === null) {
+    return;
+  }
+  loadData(tab);
 }
 
 allBtn.addEventListener("click", () => {
@@ -40,26 +45,71 @@ closeBtn.addEventListener("click", () => {
 async function loadData(activeStatus) {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
-  const response = await fetch(url);
-  const issue = await response.json();
-  if (activeStatus === "all") {
-    totalIssue = issue.data.length;
-    displayData(issue.data);
-    return;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        "Request Failed. Something went wrong. Please try again!",
+      );
+    }
+    const issue = await response.json();
+
+    if (activeStatus === "all") {
+      totalIssue = issue.data.length;
+      displayData(issue.data);
+      return;
+    }
+    const filteredData = issue.data.filter(
+      (issue) => issue.status === activeStatus,
+    );
+    totalIssue = filteredData.length;
+
+    displayData(filteredData);
+  } catch (error) {
+    showError(error.message);
+    console.log(error);
   }
-  const filteredData = issue.data.filter(
-    (issue) => issue.status === activeStatus,
-  );
-  totalIssue = filteredData.length;
-  console.log("filter", totalIssue);
-  displayData(filteredData);
 }
 
+getElementById("searchBtn").addEventListener("click", () => {
+  const inputText = getElementById("searchInput").value;
 
-const searchIssues = (searchText) =>{
-  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`;
+  searchIssues(inputText);
+});
+
+function showError(errorMessage) {
+  const issueDisplaySection = getElementById("issue-Display-Section");
+  const issueTab = getElementById("issueTab");
+  issueDisplaySection.innerHTML = "";
+  issueTab.innerHTML = "";
+
+  const warrningCard = document.createElement("div");
+  warrningCard.innerHTML = `
+<p class="text-2xl text-center font-bold">
+  Something went wrong. Please try again!
+</p>
+`;
+  issueDisplaySection.appendChild(warrningCard);
 }
 
+const searchIssues = async (searchText) => {
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(searchText)}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Something Went Wrong. Please Try again!");
+    }
+    const issues = await response.json();
+    totalIssue = issues.data.length;
+    activeTab = null;
+    handleTabChange(activeTab);
+    displayData(issues.data);
+  } catch (error) {
+    showError(error.message);
+    console.log(error);
+  }
+};
 
 const displayData = (data) => {
   const issueContainer = getElementById("issues-container");
@@ -136,4 +186,3 @@ const displayData = (data) => {
     issueContainer.appendChild(cardWrapper);
   });
 };
-

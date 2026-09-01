@@ -38,15 +38,15 @@
 
         <!-- Search -->
         <div class="w-full md:w-auto flex justify-center md:justify-end">
-          <input type="text" placeholder="Search" class="input w-auto" />
+          <input id="searchInput" type="text" placeholder="Search" class="input w-auto" />
 
-          <button class="btn btn-primary shrink-0">Search</button>
+          <button id="searchBtn" class="btn btn-primary shrink-0">Search</button>
         </div>
       </nav>
     </header>
 
     <!-- issue status section  -->
-    <section class="mt-16">
+    <section id="issueTab" class="mt-16">
       <div
         class="container w-11/12 max-w-[1120px] mx-auto shadow-sm rounded-md bg-white"
       >
@@ -59,7 +59,7 @@
     </section>
 
     <!-- issue display section -->
-    <section class="mt-4">
+    <section id="issue-Display-Section" class="mt-4">
       <div
         class="container w-11/12 max-w-[1120px] mx-auto shadow-sm rounded-md bg-[#FBFBFB]"
       >
@@ -100,55 +100,7 @@
           class="rounded-md p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
         >
           <!-- issue card  -->
-          <div
-            class="card border-t-4 border-success flex flex-col justify-start items-center rounded shadow"
-          >
-            <!-- card top -->
-            <div class="p-4 space-y-3">
-              <!-- 1 no div -->
-              <div class="flex justify-between items-center w-full">
-                <img src="./assets/Open-Status.png" alt="" />
-                <p
-                  class="text-error py-[6px] text-xs w-[80px] uppercase text-center rounded-full bg-[#FEECEC]"
-                >
-                  High
-                </p>
-              </div>
-
-              <!-- 2 no div -->
-              <div class="space-y-3">
-                <!-- card text wrap -->
-                <div class="space-y-2">
-                  <h6 class="text-sm">Fix navigation menu on mobile devices</h6>
-                  <p class="text-xs text-neutral-500">
-                    The navigation menu doesn't collapse properly on mobile
-                    devices...
-                  </p>
-                </div>
-                <!-- card label wrapper -->
-                <div class="flex max-w-fit">
-                  <p
-                    class="flex justify-between items-center max-w-fit gap-1 text-error py-[6px] px-2 text-xs uppercase text-center rounded-full bg-[#FEECEC] border border-error"
-                  >
-                    <img src="./assets/BugDroid.png" alt="" /> Bug
-                  </p>
-                  <p
-                    class="flex justify-between items-center max-w-fit gap-1 text-[#D97706] py-[6px] px-2 text-xs uppercase text-center rounded-full bg-[#FFF8DB] border border-[#FDE68A]"
-                  >
-                    <img src="./assets/BugDroid.png" alt="" /> help wanted
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!--card bottom div  -->
-            <div
-              class="p-4 text-left w-full space-y-2 border-t border-t-neutral-300"
-            >
-              <p class="text-xs text-neutral-500">#1 by john_doe</p>
-              <p class="text-xs text-neutral-500">1/15/2024</p>
-            </div>
-          </div>
+  
           <!-- issue card end here  -->
         </div>
       </div>
@@ -157,3 +109,5 @@
     <script src="./script/script.js"></script>
   </body>
 </html>
+
+
