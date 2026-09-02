@@ -43,7 +43,7 @@
             id="searchInput"
             type="text"
             placeholder="Search"
-            class="input w-auto"
+            class="input w-auto outline-none"
           />
 
           <button id="searchBtn" class="btn btn-primary shrink-0">
@@ -104,10 +104,13 @@
 
         <!-- ---------------------------------- -->
         <!-- ------------------------- issues display card section start from here -------------- -->
-         <!-- loader container -->
-<div id="loader-container" class="h-20 flex items-center justify-center col-span-full">
-  <span class="loading loading-spinner loading-xl inline-block"></span>
-</div>
+        <!-- loader container -->
+        <div
+          id="loader-container"
+          class="h-40 flex items-center justify-center col-span-full"
+        >
+          <span class="loading loading-spinner loading-xl inline-block"></span>
+        </div>
 
         <!-- issues container -->
         <div
@@ -124,13 +127,10 @@
     <!-- issue modal popup -->
 
     <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-      <div id="modal-container" class="modal-box">
-        <div class="modal-action">
-          <form method="dialog">
-            <!-- if there is a button in form, it will close the modal -->
-            <button class="btn">Close</button>
-          </form>
-        </div>
+      <div id="modal-container" class="modal-box p-8 rounded-lg space-y-6">
+        <!-- here will be dynamic data from js -->
+
+       
       </div>
     </dialog>
 

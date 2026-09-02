@@ -43,10 +43,12 @@ closeBtn.addEventListener("click", () => {
 });
 
 function showLoader(){
+  getElementById("issues-container").innerHTML="";
   getElementById("loader-container").classList.remove('hidden');
 }
 function hideLoader(){
   getElementById("loader-container").classList.add('hidden');
+  
 }
 
 async function loadData(activeStatus) {
@@ -129,12 +131,72 @@ async function showModal(id) {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    my_modal_5.showModal();
     const issue = await response.json();
+    const issueData = issue.data;
+    modalContainer.innerHTML=`
+    <!-- text content wrapper  -->
+        <div class="space-y-2">
+          <h4 class="text-2xl font-bold">${issueData.title}</h4>
+          <!-- info wrapper  -->
+          <div class="flex justify-start items-center gap-5">
+            <p
+              class="${issueData.status=== 'open'? " bg-success ": " bg-primary "}text-white inline-block py-[6px] px-2 rounded-full text-xs"
+            >
+              ${issueData.status}
+            </p>
+            <p class="text-base-content/60 inline-block text-xs">
+              Opened by ${issueData.assignee === '' ? 'Nobody': issueData.assignee}
+            </p>
+            <p class="text-base-content/60 inline-block text-xs">${
+              new Date(issueData.updatedAt).toLocaleDateString("en-US")
+            }</p>
+          </div>
+        </div>
 
-    const issueDetail = document.createElement("div");
+        <!-- label wrapper  -->
+        <div class="flex items-center justify-start gap-2">
+         ${
+          issueData.labels.map((element)=>{
+            return ` <p
+            class="w-fit ${
+              element === 'bug' ? 'bg-error/10 text-error' : element === 'help wanted' ? ' bg-warning/10 text-warning-content ' : element === 'enhancement' ? ' bg-success/10 text-success-content ' : element=== "documentation" ? ' bg-info/10 text-info-content ' : " bg-accent/60 text-accent-content "
+            }  flex items-center gap-1 py-[6px] px-3 rounded-full text-xs uppercase"
+          >
+            <img src="./assets/BugDroid.png" alt="" /> ${element}
+          </p>`
+          }).join('')
+         }
+        </div>
 
-    issueDetail.innerHTML = ``;
+        <!-- description  -->
+        <p class="text-base-content/60">
+         ${issueData.description}
+        </p>
+        <!-- assignee info -->
+         <div class="grid grid-cols-2">
+          <div>
+            <p class="text-base-content/60 pb-1">Assignee:</p>
+            <h6 class="text-base-content font-semibold">
+              ${issueData.assignee === ""? 'not assign': issueData.assignee}
+            </h6>
+          </div>
+          <div>
+            <p class="text-base-content/60 pb-1">Priority:</p>
+            <p class="${issueData.priority==='high'?' bg-error/10 text-error ':issueData.priority==='low'?' bg-accent/10 text-info ':" bg-warning/10 text-warning "} py-[6px] px-4 text-xs w-fit rounded-full uppercase">
+              ${issueData.priority}
+            </p>
+          </div>
+         </div>
+         
+          <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-primary outline-none">Close</button>
+          </form>
+        </div>
+         
+         `
+  my_modal_5.showModal();
   } catch (error) {
     console.log(error);
     showError();
@@ -191,7 +253,9 @@ const displayData = (data) => {
                  ${element.labels
                    .map((label) => {
                      return `<p
-                    class="flex justify-start items-center max-w-fit gap-1 ${label === "bug" ? "text-error" : label === "help wanted" ? "text-[#D97706]" : "text-[#d96c06]"}  py-[6px] px-2 text-xs uppercase text-center rounded-full ${label === "bug" ? "bg-[#FEECEC]" : label === "help wanted" ? "bg-[#FFF8DB]" : "bg-green-200"} border ${label === "bug" ? "border-error" : label === "help wanted" ? "border-[#D97706]" : "border-green-500"} "
+                    class="flex justify-start items-center max-w-fit gap-1   py-[6px] px-2 text-xs uppercase text-center rounded-full ${
+              label === 'bug' ? 'bg-error/10 text-error' : label === 'help wanted' ? ' bg-warning/10 text-warning-content ' : label === 'enhancement' ? ' bg-success/10 text-success-content ' : label=== "documentation" ? ' bg-info/10 text-info-content ' : " bg-accent/60  text-accent-content "
+            } border ${label === "bug" ? "border-error" : label === "help wanted" ? "border-[#D97706]" : "border-green-500"} "
                   >
                     <img src="./assets/BugDroid.png" alt="" /> ${label}
                   </p> `;
