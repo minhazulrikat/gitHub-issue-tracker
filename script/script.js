@@ -126,6 +126,7 @@ const searchIssues = async (searchText) => {
 async function showModal(id) {
   const modalContainer = getElementById("modal-container");
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+   
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -198,6 +199,7 @@ async function showModal(id) {
          `
   my_modal_5.showModal();
   } catch (error) {
+    
     console.log(error);
     showError();
   }
