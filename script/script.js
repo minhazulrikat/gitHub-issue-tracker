@@ -43,12 +43,15 @@ closeBtn.addEventListener("click", () => {
 });
 
 function showLoader(){
-  
+  getElementById("loader-container").classList.remove('hidden');
+}
+function hideLoader(){
+  getElementById("loader-container").classList.add('hidden');
 }
 
 async function loadData(activeStatus) {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
-
+  showLoader();
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -72,6 +75,8 @@ async function loadData(activeStatus) {
   } catch (error) {
     showError();
     console.log(error);
+  }finally{
+    hideLoader();
   }
 }
 
@@ -98,7 +103,7 @@ function showError() {
 
 const searchIssues = async (searchText) => {
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(searchText)}`;
-
+  showLoader();
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -112,6 +117,8 @@ const searchIssues = async (searchText) => {
   } catch (error) {
     showError();
     console.log(error);
+  }finally{
+    hideLoader();
   }
 };
 async function showModal(id) {
