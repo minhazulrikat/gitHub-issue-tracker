@@ -42,6 +42,10 @@ closeBtn.addEventListener("click", () => {
   handleTabChange("closed");
 });
 
+function showLoader(){
+  
+}
+
 async function loadData(activeStatus) {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
@@ -121,10 +125,9 @@ async function showModal(id) {
     my_modal_5.showModal();
     const issue = await response.json();
 
-     const issueDetail = document.createElement("div");
+    const issueDetail = document.createElement("div");
 
-     issueDetail.innerHTML = ``
-
+    issueDetail.innerHTML = ``;
   } catch (error) {
     console.log(error);
     showError();
